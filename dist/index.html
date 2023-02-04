@@ -1,13 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./main.js" defer></script>
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <title>To-Do-List</title>
+  </head>
+  <body>
+    <div class="pop-up" id="popUp">
+      <span class="close">x</span>
+
+      <form method="post">
+        <label for="name" class="input">
+          <span>Title</span>
+          <input type="text" id="name" required />
+        </label>
+
+        <label for="note" class="input">
+          <span>Note</span>
+          <input type="text" id="note" required />
+        </label>
+
+        <label for="date" class="input">
+          <span>Due Date</span>
+          <input id="date" type="date" required />
+        </label>
+
+        <div class="priority">
+          <p>Priority:</p>
+          <label for="low">
+            <input type="radio" id="low" name="priority" value="Low" />
+            <span> Low</span> </label
+          ><br />
+
+          <label for="medium">
+            <input type="radio" id="medium" name="priority" value="Medium" />
+            <span> Medium</span> </label
+          ><br />
+
+          <label for="high">
+            <input type="radio" id="high" name="priority" value="High" />
+            <span> High </span>
+          </label>
+        </div>
+
+        <div class="status input">
+          <span>Completed:</span>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="wrapper submit">
+          <button id="submit" type="submit">Add Book</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="main">
+      <div class="options">
+        <button class="button">Create Project</button>
+        <button class="button">Add Task</button>
+      </div>
+      <div class="content">
+        <div class="leftSection">
+          <p>Projects:-</p>
+          <div class="projects"></div>
+        </div>
+        <div class="info">
+          <div class="tasks"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

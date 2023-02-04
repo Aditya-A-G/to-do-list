@@ -1,0 +1,253 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #a5c7ff;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  padding: 3.2em;
+  background-color: #5e67ff;
+  height: 15%;
+}
+
+.button {
+  padding: 0.8em;
+  min-height: 0.4em;
+  min-width: 1.6em;
+  border: none;
+  border-radius: 8px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+}
+
+.content .leftSection {
+  padding: 2em;
+}
+
+.content .leftSection p {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.content .leftSection .projects {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  aspect-ratio: 2/2;
+  gap: 2em;
+}
+
+.content .leftSection .projects .project {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.content .leftSection .projects .project p {
+  font-size: 3.2rem;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  padding-top: 5.5em;
+  width: 100%;
+}
+
+.info .tasks {
+  width: 80%;
+  background-color: blanchedalmond;
+}
+
+.info .tasks .task {
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: grid;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.task p {
+  font-size: 2.4rem;
+  text-align: center;
+}
+
+.task {
+  background-color: #a5c7ff;
+}
+
+.blur {
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.pop-up {
+  height: 80%;
+  width: 80%;
+  background-color: hotpink;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 3.2em;
+
+  border-radius: 8px;
+  overflow-y: auto;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.active {
+  pointer-events: all;
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 500ms;
+}
+
+.pop-up .close {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  cursor: pointer;
+  color: red;
+  font-size: 3rem;
+  user-select: none;
+}
+
+.pop-up .status .switch input:checked + .slider {
+  background-color: #ccc;
+}
+
+.pop-up .status .switch input:checked + .slider::before {
+  background-color: rgb(28, 230, 28);
+}
+
+.pop-up span {
+  font-size: 3.2rem;
+  color: black;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.pop-up input {
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 0.6em;
+  font-size: 2rem;
+}
+
+.pop-up input:focus {
+  outline: none;
+}
+
+.priority p {
+  font-size: 3.2rem;
+  padding-bottom: 0.4em;
+}
+
+.priority label {
+  display: flex;
+  align-items: center;
+  gap: 3em;
+}
+
+.priority span {
+  font-size: 2rem;
+}
+
+.priority label input {
+  width: 5%;
+}
+
+.pop-up .submit {
+  text-align: start;
+  padding: 0;
+}
+
+.submit button {
+  padding: 0.8em;
+  min-height: 0.4em;
+  min-width: 1.6em;
+  border: 3px solid cyan;
+  border-radius: 8px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 50px;
+  margin: 0 10px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:checked + .slider::before {
+  transform: translateX(28px);
+}
