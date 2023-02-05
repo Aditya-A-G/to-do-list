@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="pop-up" id="popUp">
-      <span class="close">x</span>
+      <span class="close closeTaskForm">x</span>
 
       <form method="post">
         <label for="name" class="input">
@@ -54,15 +54,30 @@
         </div>
 
         <div class="wrapper submit">
-          <button id="submit" type="submit">Add Book</button>
+          <button id="taskSubmit" type="submit">Add Task</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="pop-up" id="projectPopUp">
+      <span class="close closeProjectForm">x</span>
+
+      <form method="post">
+        <label for="projectName" class="input">
+          <span>Title</span>
+          <input type="text" id="projectName" required />
+        </label>
+
+        <div class="wrapper submit">
+          <button id="projectSubmit" type="submit">Add Project</button>
         </div>
       </form>
     </div>
 
     <div class="main">
       <div class="options">
-        <button class="button">Create Project</button>
-        <button class="button">Add Task</button>
+        <button class="button createProject">Create Project</button>
+        <button class="button addTask">Add Task</button>
       </div>
       <div class="content">
         <div class="leftSection">

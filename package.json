@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
-     "build": "webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "pubsub-js": "^1.9.4"
   }
 }
