@@ -18,8 +18,7 @@ body {
   background-color: #a5c7ff;
 }
 
-
-.main{
+.main {
   min-height: 100%;
 }
 
@@ -44,7 +43,6 @@ body {
   display: grid;
   grid-template-columns: 4fr 2fr;
 }
-
 
 .content .leftSection {
   height: 100%;
@@ -71,7 +69,6 @@ body {
   text-align: center;
   border: 1px solid hotpink;
   aspect-ratio: 2/2;
-
 }
 
 .content .leftSection .projects .project p {
