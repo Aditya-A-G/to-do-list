@@ -11,7 +11,7 @@
     <div class="pop-up" id="popUp">
       <span class="close closeTaskForm">x</span>
 
-      <form method="post">
+      <form id="taskForm">
         <label for="name" class="input">
           <span>Title</span>
           <input type="text" id="name" required />
@@ -30,17 +30,29 @@
         <div class="priority">
           <p>Priority:</p>
           <label for="low">
-            <input type="radio" id="low" name="priority" value="Low" />
+            <input type="radio" id="low" name="priority" value="Low" required />
             <span> Low</span> </label
           ><br />
 
           <label for="medium">
-            <input type="radio" id="medium" name="priority" value="Medium" />
+            <input
+              type="radio"
+              id="medium"
+              name="priority"
+              value="Medium"
+              required
+            />
             <span> Medium</span> </label
           ><br />
 
           <label for="high">
-            <input type="radio" id="high" name="priority" value="High" />
+            <input
+              type="radio"
+              id="high"
+              name="priority"
+              value="High"
+              required
+            />
             <span> High </span>
           </label>
         </div>
@@ -54,7 +66,7 @@
         </div>
 
         <div class="wrapper submit">
-          <button id="taskSubmit" type="submit">Add Task</button>
+          <button id="taskSubmit">Add Task</button>
         </div>
       </form>
     </div>
