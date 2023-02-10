@@ -1,5 +1,4 @@
 export default function Tasks(e, Id, taskID) {
-  console.log(e);
   const projectId = Id;
   const taskId = taskID;
   let name = e.target[0].value;
@@ -13,6 +12,5 @@ export default function Tasks(e, Id, taskID) {
     ? "high"
     : false;
   let isCompleted = e.target[6].checked;
-  console.log(priority);
   return { projectId, taskId, name, note, dueDate, priority, isCompleted };
 }

@@ -212,7 +212,7 @@ form {
   padding: 0;
 }
 
-.submit button {
+.submit button, #popUp button{
   padding: 0.8em;
   min-height: 0.4em;
   min-width: 1.6em;
