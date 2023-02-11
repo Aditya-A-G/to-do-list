@@ -42,8 +42,6 @@ function displayTaskInfo(eventName, [task, projectId, taskId]) {
 
   taskFormCheckbox.checked = task.isCompleted;
 
-  //disable
-
   taskForm.style.pointerEvents = "none";
   taskFormNoteField.setAttribute("readOnly", true);
   taskFormDateField.setAttribute("readOnly", true);
@@ -71,6 +69,13 @@ export function closeProjectForm() {
 export function openTaskForm() {
   taskPopUpForm.classList.add("active");
   main.classList.add("blur");
+  taskFormNameField.value = "";
+  taskFormNoteField.value = "";
+  taskFormDateField.value = "";
+  taskFormPriorityLow.checked = false;
+  taskFormPriorityMedium.checked = false;
+  taskFormPriorityHigh.checked = false;
+  taskFormCheckbox.checked = false;
 }
 
 export function closeTaskForm(eventName, e) {
@@ -157,13 +162,11 @@ function makeFormEditable() {
 
 function updateTask(eventName, taskObj) {
   const tasks = tasksContainer.childNodes;
-  console.log(tasks);
   tasks.forEach((task) => {
     let projectId = task.getAttribute("data-projectId");
     let taskId = task.getAttribute("data-taskId");
     if (taskObj.projectId == projectId && taskObj.taskId == taskId) {
       const childNodes = task.childNodes;
-      console.log(childNodes);
       childNodes[0].textContent = taskObj.name;
       childNodes[1].textContent = taskObj.dueDate;
     }
@@ -179,3 +182,4 @@ PubSub.subscribe("displayTaskInfo", displayTaskInfo);
 PubSub.subscribe("editButtonClicked", makeFormEditable);
 PubSub.subscribe("closeTaskButtonClicked", closeTaskForm);
 PubSub.subscribe("reRenderTask", updateTask);
+PubSub.subscribe("displayProjects", addProjectToDom);

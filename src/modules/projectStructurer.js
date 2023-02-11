@@ -2,17 +2,19 @@ import PubSub from "pubsub-js";
 import Project from "./project";
 import Task from "./task";
 
-const projects = [
+export let projects = [
   { name: "Default Project", projectId: 1, taskId: 0, tasks: [] },
 ];
 
-let projectId = 1;
-let currentProjectId = 1;
+export let projectId = 1;
+export let currentProjectId = 1;
 
 function addProject(eventName, payload) {
   projectId += 1;
   const projectObj = Project(payload, projectId);
   projects.push(projectObj);
+  PubSub.publishSync("updateProjectId", projectId);
+  PubSub.publishSync("updateProjectArray", projects);
   PubSub.publish("projectObjCreated", projectObj);
 }
 
@@ -22,6 +24,7 @@ function addTask(eventName, payload) {
       obj.taskId += 1;
       const taskObj = Task(payload, currentProjectId, obj.taskId);
       obj.tasks.push(taskObj);
+      PubSub.publishSync("updateProjectArray", projects);
       PubSub.publish("taskObjCreated", taskObj);
     }
   });
@@ -31,6 +34,7 @@ function showTasks(eventName, clickedProjectId) {
   if (currentProjectId != clickedProjectId) {
     PubSub.publish("clearTasksContainer");
     currentProjectId = clickedProjectId;
+    PubSub.publishSync("updateCurrentProjectId", currentProjectId);
     projects.forEach((obj) => {
       if (obj.projectId == clickedProjectId) {
         obj.tasks.forEach((task) => {
@@ -52,8 +56,7 @@ function showTaskInfo(eventName, [clickedProjectId, taskId]) {
     }
   });
 }
-PubSub.publish("projectObjCreated", projects[0]);
-PubSub.subscribe("projectSubmitBtnClicked", addProject);
+
 PubSub.subscribe("taskSubmitBtnClicked", (eventName, e) => {
   if (
     e.srcElement.hasAttribute("data-projectId") ||
@@ -77,7 +80,8 @@ PubSub.subscribe("taskSubmitBtnClicked", (eventName, e) => {
               ? "high"
               : false;
             task.isCompleted = e.target[6].checked;
-            PubSub.publish("reRenderTask", task)
+            PubSub.publishSync("updateProjectArray", projects);
+            PubSub.publish("reRenderTask", task);
           }
         });
       }
@@ -87,5 +91,42 @@ PubSub.subscribe("taskSubmitBtnClicked", (eventName, e) => {
   }
   PubSub.publish("closeTaskButtonClicked", e);
 });
+
+function updateInfo() {
+  projectId = JSON.parse(localStorage.getItem("projectId"));
+  currentProjectId = JSON.parse(localStorage.getItem("currentProjectId"));
+  projects = JSON.parse(localStorage.getItem("projects"));
+
+  PubSub.publish("displayAllProjects");
+}
+
+function displayProjects() {
+  projects.forEach((obj) => {
+    PubSub.publish("displayProjects", obj);
+  });
+
+  PubSub.publish("displayTasksOfSelectedProject");
+}
+
+function displayDefaultProject() {
+  PubSub.publish("projectObjCreated", projects[0]);
+  PubSub.publish("displayTasksOfSelectedProject");
+}
+
+function displaySelectedProjectTasks() {
+  projects.forEach((obj) => {
+    if (obj.projectId == currentProjectId) {
+      obj.tasks.forEach((task) => {
+        PubSub.publish("displayTask", task);
+      });
+    }
+  });
+}
+
 PubSub.subscribe("projectClicked", showTasks);
 PubSub.subscribe("taskClicked", showTaskInfo);
+PubSub.subscribe("dataIsAlreadyPresent", updateInfo);
+PubSub.subscribe("dataIsNotAlreadyPresent", displayDefaultProject);
+PubSub.subscribe("projectSubmitBtnClicked", addProject);
+PubSub.subscribe("displayAllProjects", displayProjects);
+PubSub.subscribe("displayTasksOfSelectedProject", displaySelectedProjectTasks);
